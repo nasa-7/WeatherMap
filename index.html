@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WeatherMap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="brand">
+      <span class="brand-logo" aria-hidden="true">&#9728;&#65039;</span>
+      <div>
+        <h1 class="page-title">WeatherMap</h1>
+        <p class="page-subtitle">Live weather for any place on Earth</p>
+      </div>
+    </div>
+    <form id="search-form" class="search-form" autocomplete="off">
+      <label for="location-input" class="sr-only">Please enter location</label>
+      <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+      <input id="location-input" class="search-input" type="text" placeholder="Search for a location, e.g. Port Sudan" required>
+      <button id="get-weather" class="search-button" type="submit">Get Weather</button>
+    </form>
+  </header>
+
+  <main class="container">
+    <div id="alerts" class="alerts" role="alert" aria-live="assertive"></div>
+
+    <div class="layout">
+      <div class="map-wrapper">
+        <div id="spinner" class="spinner-overlay hidden" aria-label="Loading"><div class="spinner"></div></div>
+        <div id="map" class="map"></div>
+      </div>
+
+      <aside class="side">
+        <section class="panel" aria-label="Favorite cities">
+          <div class="panel-head">
+            <h2 class="panel-title">&#9733; Favorites</h2>
+            <button id="fav-add" class="mini-btn" type="button">+ Save current</button>
+          </div>
+          <div id="favorites-list" class="favorites-list"></div>
+        </section>
+
+        <section class="panel panel-grow" aria-label="5-day forecast">
+          <div class="panel-head">
+            <h2 class="panel-title">5-Day Forecast</h2>
+            <span id="forecast-city" class="panel-sub"></span>
+          </div>
+          <p id="forecast-empty" class="empty-note">Search for a city to see the next five days.</p>
+          <div id="forecast-list" class="forecast-list"></div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <button id="chat-toggle" class="chat-toggle" type="button" aria-label="Open weather assistant">
+    <span class="chat-toggle-icon" aria-hidden="true">&#10024;</span> Ask AI
+  </button>
+  <section id="chat-panel" class="chat-panel hidden" aria-label="Weather assistant">
+    <div class="chat-header">
+      <span class="chat-avatar" aria-hidden="true">&#129302;</span>
+      <div class="chat-head-text"><strong>WeatherBot</strong><small>&#9679; Online &middot; knows your last search</small></div>
+      <button id="chat-close" class="chat-close" type="button" aria-label="Close chat">&times;</button>
+    </div>
+    <div id="chat-log" class="chat-log" aria-live="polite"></div>
+    <div id="chat-suggest" class="chat-suggest"></div>
+    <form id="chat-form" class="chat-form" autocomplete="off">
+      <input id="chat-input" class="chat-input" type="text" placeholder="Ask about the weather..." required>
+      <button id="chat-send" class="chat-send" type="submit" aria-label="Send">&#10148;</button>
+    </form>
+  </section>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
