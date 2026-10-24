@@ -212,7 +212,7 @@ async function fetchMeteo(place) {
   const days = d.daily.time.map((t, i) => {
     const info = describeWmo(d.daily.weather_code[i]);
     return { date: new Date(t + "T00:00:00Z"), hi: d.daily.temperature_2m_max[i], lo: d.daily.temperature_2m_min[i],
-             icon: info[1], description: info[0], alt: info[0] };
+        icon: info[1], description: info[0], alt: info[0] };
   });
   return { current: current, days: days };
 }
@@ -271,6 +271,7 @@ function buildShareMessage(data) {
     ", humidity " + data.main.humidity + "%, wind " + data.wind.speed + " m/s. (via WeatherMap)";
 }
 
+/* ----------------  share Weather(bonus) ---------------- */
 async function shareWeather(data) {
   const text = buildShareMessage(data);
   if (navigator.share) {
